@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 1.0f;
     public float jumpForce  = 20.0f;
-    public float xLeftRail = -2.5f;
-    public float xRightRail = 2.5f;
+    public float xLeftRail = -5f;
+    public float xRightRail = 5f;
     public float xMiddleRail = 0f;
     public float gravityModifier = -10.0f;
     public bool gameOver = false;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool isRolling = false;
     private Rigidbody playerRb;
     private Animator playerAnim;
+    private bool isFreeze = false;
 
 
     void Start()
@@ -32,17 +33,20 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentPos == 0)
+        if (!isFreeze)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(xMiddleRail,transform.position.y,transform.position.z),speed * Time.deltaTime);
-        }
-        else if (currentPos == -1)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(xLeftRail,transform.position.y,transform.position.z),speed * Time.deltaTime);
-        }
-        else if (currentPos == 1)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(xRightRail,transform.position.y,transform.position.z),speed * Time.deltaTime);
+            if (currentPos == 0)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(xMiddleRail, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            }
+            else if (currentPos == -1)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(xLeftRail, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            }
+            else if (currentPos == 1)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(xRightRail, transform.position.y, transform.position.z), speed * Time.deltaTime);
+            }
         }
     }
 
@@ -107,6 +111,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround=true;
+        }
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            isFreeze = true;
+            gameOver = true;
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetInteger("DeathType_int", 1);
+
         }
     }
 }
