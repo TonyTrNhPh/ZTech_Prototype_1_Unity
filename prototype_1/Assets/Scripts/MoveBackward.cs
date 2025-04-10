@@ -4,18 +4,22 @@ public class MoveBackward : MonoBehaviour
 {
     public float zBound=-35;
     public float speed = 20f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private PlayerController playerController;
+
     void Start()
     {
-        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0, 0, -speed*Time.deltaTime);
+        if (playerController.gameOver == false)
+        {
+            transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
 
-        if (transform.position.z < zBound)
-            transform.position = new Vector3(0, 0, 0);
+            if (transform.position.z < zBound)
+                transform.position = new Vector3(10, 0, 0);
+        }
     }
 }

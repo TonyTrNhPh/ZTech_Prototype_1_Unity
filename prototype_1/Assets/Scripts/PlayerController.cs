@@ -8,19 +8,26 @@ public class PlayerController : MonoBehaviour
     public float xLeftRail = -2.5f;
     public float xRightRail = 2.5f;
     public float xMiddleRail = 0f;
-    public float crounchHeight = 1.0f;
+    public float gravityModifier = -10.0f;
+    public bool gameOver = false;
+
 
     private int currentPos = 0;
-    //private Vector3 startPos = new Vector3(0, 1.0f, -10.0f);
-    private Rigidbody rb;
+    private float rollDuration = 0.7f;
+    private float rollTimer = 0f;
     private bool isOnGround = true;
-  
+    private bool isRolling = false;
+    private Rigidbody playerRb;
+    private Animator playerAnim;
+
 
     void Start()
     {
         currentPos = 0;
-        rb = GetComponent<Rigidbody>();
-        
+        playerRb = GetComponent<Rigidbody>();
+        playerAnim = GetComponent<Animator>();
+        Physics.gravity *= gravityModifier;
+
     }
 
     private void FixedUpdate()
@@ -42,7 +49,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && !gameOver)
         {
             if (currentPos == 0)
             {
@@ -54,7 +61,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !gameOver)
         {
             if (currentPos == 0)
             {
@@ -65,12 +72,36 @@ public class PlayerController : MonoBehaviour
                 currentPos = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isOnGround && !gameOver)
         {
-            rb.AddForce(new Vector3(0,jumpForce,0), ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            playerAnim.SetTrigger("Jump_trig");
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && !gameOver)
+        {
+            isRolling = true;
+            rollTimer = 0f;
+            playerAnim.SetTrigger("Roll_trig");
+        }
+        if(isRolling)
+        {
+            rollTimer += Time.deltaTime;
+            if (rollTimer >= rollDuration)
+            {
+                isRolling = false;
+                rollTimer = 0f;
+                playerAnim.SetBool("Roll_b", false);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gameOver = true;
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetInteger("DeathType_int", 1);
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
