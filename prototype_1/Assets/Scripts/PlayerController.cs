@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,7 +11,8 @@ public class PlayerController : MonoBehaviour
     public float xMiddleRail = 0f;
     public float gravityModifier = -10.0f;
     public bool gameOver = false;
-
+    public ParticleSystem dirtParti;
+    public ParticleSystem coinParti;
 
     private int currentPos = 0;
     private float rollDuration = 0.7f;
@@ -20,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private Animator playerAnim;
     private bool isFreeze = false;
-
+    private int score = 0;
 
     void Start()
     {
@@ -28,7 +30,8 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         Physics.gravity *= gravityModifier;
-
+        dirtParti.Play();
+        Console.WriteLine("Game Started");
     }
 
     private void FixedUpdate()
@@ -81,14 +84,16 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
+            dirtParti.Stop();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && !gameOver)
         {
             isRolling = true;
             rollTimer = 0f;
             playerAnim.SetTrigger("Roll_trig");
+            dirtParti.Stop();
         }
-        if(isRolling)
+        if (isRolling)
         {
             rollTimer += Time.deltaTime;
             if (rollTimer >= rollDuration)
@@ -98,12 +103,6 @@ public class PlayerController : MonoBehaviour
                 playerAnim.SetBool("Roll_b", false);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            gameOver = true;
-            playerAnim.SetBool("Death_b", true);
-            playerAnim.SetInteger("DeathType_int", 1);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -111,14 +110,34 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround=true;
+            dirtParti.Play();
         }
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            dirtParti.Stop();
             isFreeze = true;
             gameOver = true;
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
-
+            Console.WriteLine("Game Over");
         }
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            score++;
+            Debug.Log("Score: " + score);
+        }
+    }
+    public void PlayCoinParticle()
+    {
+        if (coinParti != null && !coinParti.isPlaying)
+        {
+            StartCoroutine(PlayParticleForDuration(0.5f));
+        }
+    }
+    private IEnumerator PlayParticleForDuration(float duration)
+    {
+        coinParti.Play();
+        yield return new WaitForSeconds(duration);
+        coinParti.Stop();
     }
 }

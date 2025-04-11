@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 8339127751448406385}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -847,6 +847,9 @@ MonoBehaviour:
   xRightRail: 2.5
   xMiddleRail: 0
   gravityModifier: 4
+  gameOver: 0
+  dirtParti: {fileID: 0}
+  coinParti: {fileID: 0}
 --- !u!1 &2666769752313224879
 GameObject:
   m_ObjectHideFlags: 0
