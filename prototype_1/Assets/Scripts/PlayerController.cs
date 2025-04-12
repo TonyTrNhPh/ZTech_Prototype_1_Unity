@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,9 +12,13 @@ public class PlayerController : MonoBehaviour
     public float xRightRail = 5f;
     public float xMiddleRail = 0f;
     public float gravityModifier = -10.0f;
+    public float scorePer = 0.2f;
     public bool gameOver = false;
     public ParticleSystem dirtParti;
     public ParticleSystem coinParti;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI coinText;
+    public TextMeshProUGUI multipleText;
 
     private int currentPos = 0;
     private float rollDuration = 0.7f;
@@ -23,14 +29,24 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private bool isFreeze = false;
     private int score = 0;
+    private int coin = 0;
 
     void Start()
     {
         currentPos = 0;
+        score = 0;
+        scoreText.text = "000000";
+        coinText.text = "$" + coin;
+        multipleText.text = "x" + 1;
+
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
+
         Physics.gravity *= gravityModifier;
+
         dirtParti.Play();
+        StartCoroutine(IncreaseScoreOverTime(scorePer));
+
         Console.WriteLine("Game Started");
     }
 
@@ -55,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.LeftArrow) && !gameOver)
         {
             if (currentPos == 0)
@@ -121,12 +136,19 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetInteger("DeathType_int", 1);
             Console.WriteLine("Game Over");
         }
-        if (collision.gameObject.CompareTag("Coin"))
-        {
-            score++;
-            Debug.Log("Score: " + score);
-        }
     }
+
+    public void UpdateCoin()
+    {
+        coin++;
+        coinText.text = "$" + coin;
+    }
+    public void UpdateScore(int scoreToAdd, int multiple)
+    {
+        score += scoreToAdd * multiple;
+        scoreText.text = score.ToString("000000");
+    }
+
     public void PlayCoinParticle()
     {
         if (coinParti != null && !coinParti.isPlaying)
@@ -139,5 +161,14 @@ public class PlayerController : MonoBehaviour
         coinParti.Play();
         yield return new WaitForSeconds(duration);
         coinParti.Stop();
+    }
+
+    private IEnumerator IncreaseScoreOverTime(float repeatRate)
+    {
+        while (!gameOver)
+        {
+            yield return new WaitForSeconds(repeatRate);
+            UpdateScore(1, 1);
+        }
     }
 }

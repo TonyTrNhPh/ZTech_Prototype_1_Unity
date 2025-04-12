@@ -31,6 +31,7 @@ public class CollectibleBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            playerController.UpdateCoin();
             playerController.PlayCoinParticle();
             Destroy(gameObject);
         }
