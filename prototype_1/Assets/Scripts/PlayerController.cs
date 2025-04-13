@@ -1,56 +1,82 @@
-using System;
-using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     public float speed = 1.0f;
-    public float jumpForce  = 20.0f;
+    public float jumpForce = 20.0f;
     public float xLeftRail = -5f;
     public float xRightRail = 5f;
     public float xMiddleRail = 0f;
     public float gravityModifier = -10.0f;
-    public float scorePer = 0.2f;
-    public bool gameOver = false;
+
+    [Header("Effects")]
     public ParticleSystem dirtParti;
-    public ParticleSystem coinParti;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI coinText;
-    public TextMeshProUGUI multipleText;
 
     private int currentPos = 0;
     private float rollDuration = 0.7f;
     private float rollTimer = 0f;
     private bool isOnGround = true;
     private bool isRolling = false;
+    private bool isFreeze = false;
     private Rigidbody playerRb;
     private Animator playerAnim;
-    private bool isFreeze = false;
-    private int score = 0;
-    private int coin = 0;
 
     void Start()
     {
-        currentPos = 0;
-        score = 0;
-        scoreText.text = "000000";
-        coinText.text = "$" + coin;
-        multipleText.text = "x" + 1;
-
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
-
         Physics.gravity *= gravityModifier;
+        GameManager.OnGameStateChanged += HandleGameStateChanged;
+    }
 
-        dirtParti.Play();
-        StartCoroutine(IncreaseScoreOverTime(scorePer));
-
-        Console.WriteLine("Game Started");
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= HandleGameStateChanged;
     }
 
     private void FixedUpdate()
+    {
+        SwitchRail();
+    }
+
+    void Update()
+    {
+        PlayerInput();
+    }
+
+    private void HandleGameStateChanged(GameState state)
+    {
+        if (state == GameState.Playing)
+        {
+            currentPos = 0;
+            isFreeze = false;
+            isOnGround = true;
+            isRolling = false;
+            playerAnim.SetBool("Death_b", false);
+            playerAnim.SetFloat("Speed_f", 1f);
+            dirtParti.Play();
+            transform.position = new Vector3(xMiddleRail, transform.position.y, -10f); 
+        }
+        else if (state == GameState.GameOver)
+        {
+            dirtParti.Stop();
+            isFreeze = true;
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetInteger("DeathType_int", 1);
+            playerAnim.SetFloat("Speed_f", 0f);
+        }
+        else if (state == GameState.Start)
+        {
+            isFreeze = true;
+            dirtParti.Stop();
+            playerAnim.SetBool("Death_b", false);
+            playerAnim.SetFloat("Speed_f", 0f);
+        }
+    }
+
+    private void SwitchRail()
     {
         if (!isFreeze)
         {
@@ -69,9 +95,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void PlayerInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && !gameOver)
+        if (GameManager.Instance.IsGameOver()) return;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (currentPos == 0)
             {
@@ -83,7 +111,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !gameOver)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (currentPos == 0)
             {
@@ -94,20 +122,23 @@ public class PlayerController : MonoBehaviour
                 currentPos = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isOnGround && !gameOver)
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isOnGround)
         {
-            playerRb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
             dirtParti.Stop();
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling && !gameOver)
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling)
         {
             isRolling = true;
             rollTimer = 0f;
             playerAnim.SetTrigger("Roll_trig");
             dirtParti.Stop();
         }
+
         if (isRolling)
         {
             rollTimer += Time.deltaTime;
@@ -124,51 +155,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isOnGround=true;
+            isOnGround = true;
             dirtParti.Play();
         }
-        if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            dirtParti.Stop();
-            isFreeze = true;
-            gameOver = true;
-            playerAnim.SetBool("Death_b", true);
-            playerAnim.SetInteger("DeathType_int", 1);
-            Console.WriteLine("Game Over");
-        }
-    }
-
-    public void UpdateCoin()
-    {
-        coin++;
-        coinText.text = "$" + coin;
-    }
-    public void UpdateScore(int scoreToAdd, int multiple)
-    {
-        score += scoreToAdd * multiple;
-        scoreText.text = score.ToString("000000");
-    }
-
-    public void PlayCoinParticle()
-    {
-        if (coinParti != null && !coinParti.isPlaying)
-        {
-            StartCoroutine(PlayParticleForDuration(0.5f));
-        }
-    }
-    private IEnumerator PlayParticleForDuration(float duration)
-    {
-        coinParti.Play();
-        yield return new WaitForSeconds(duration);
-        coinParti.Stop();
-    }
-
-    private IEnumerator IncreaseScoreOverTime(float repeatRate)
-    {
-        while (!gameOver)
-        {
-            yield return new WaitForSeconds(repeatRate);
-            UpdateScore(1, 1);
+            GameManager.Instance.TriggerGameOver();
         }
     }
 }
