@@ -18,7 +18,7 @@ public class CoinScript : MonoBehaviour
         coinParti = GetComponentInChildren<ParticleSystem>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         SpinAround();
         if (GameManager.Instance.IsGameOver()) return;
@@ -28,12 +28,12 @@ public class CoinScript : MonoBehaviour
 
     void SpinAround()
     {
-        transform.Rotate(0, 0, spinSpeed * Time.deltaTime, Space.Self);
+        transform.Rotate(0, 0, spinSpeed * Time.fixedDeltaTime, Space.Self);
     }
 
     void Move()
     {
-        transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
+        transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
     }
 
     void DestroyOutBound()

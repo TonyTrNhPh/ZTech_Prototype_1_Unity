@@ -5,7 +5,7 @@ public class FenceScript : MonoBehaviour
     public float zBound = -35;
     public float speed = 20f;
 
-    void Update()
+    void FixedUpdate()
     {
         if (GameManager.Instance.IsGameOver()) return;
         Move();
@@ -14,7 +14,7 @@ public class FenceScript : MonoBehaviour
 
     void Move()
     {
-        transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
+        transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
     }
 
     void DestroyOutBound()
