@@ -22,11 +22,13 @@ public class PlayerController : MonoBehaviour
     private bool isFreeze = false;
     private Rigidbody playerRb;
     private Animator playerAnim;
+    private BoxCollider playerCol;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
+        playerCol = GetComponent<BoxCollider>();
         Physics.gravity *= gravityModifier;
         GameManager.OnGameStateChanged += HandleGameStateChanged;
     }
@@ -147,6 +149,7 @@ public class PlayerController : MonoBehaviour
         {
             isRolling = true;
             rollTimer = 0f;
+            StartCoroutine(ReduceColliderHeight(0.35f));
             playerAnim.SetTrigger("Roll_trig");
             dirtParti.Stop();
         }
@@ -173,5 +176,14 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.UpdateGameState(GameState.GameOver);
         }
+    }
+
+    private IEnumerator ReduceColliderHeight(float duration)
+    {
+        playerCol.center = new Vector3(0, 0.8f, 0);
+        playerCol.size = new Vector3(1.2f, 1.5f, 1);
+        yield return new WaitForSeconds(duration);
+        playerCol.center = new Vector3(0, 1.5f, 0);
+        playerCol.size = new Vector3(1.2f, 3f, 1);
     }
 }
