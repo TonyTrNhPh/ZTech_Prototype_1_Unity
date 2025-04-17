@@ -3,7 +3,7 @@ using UnityEngine;
 public class FenceScript : MonoBehaviour
 {
     public float zBound = -35;
-    public float speed = 20f;
+    public float speed = 30f;
 
     void FixedUpdate()
     {

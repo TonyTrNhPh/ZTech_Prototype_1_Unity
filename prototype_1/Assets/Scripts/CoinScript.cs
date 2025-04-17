@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CoinScript : MonoBehaviour
@@ -7,7 +5,7 @@ public class CoinScript : MonoBehaviour
     [Header("Coin settings")]
     public float spinSpeed = 180f;
     public float zBound = -35;
-    public float speed = 20f;
+    public float speed = 30f;
 
     [Header("Particle settings")]
     private ParticleSystem coinParti;

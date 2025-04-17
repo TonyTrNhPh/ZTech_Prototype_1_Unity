@@ -8,8 +8,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] coinPrefabs;     // Array of coin prefabs
 
     [Header("Spawn Settings")]
-    public float startDelay = 2f;        // Initial delay before spawning starts
-    public float repeatRate = 2f;        // Time between spawns
+    public float startDelay = 1f;        // Initial delay before spawning starts
+    public float repeatRate = 1f;        // Time between spawns
     public float coinSpacing = 2f;       // Distance between coins in a row (Z-axis)
     public float spawnZPosition = 40f;   // Z position where objects spawn
     public float[] xSpawnPos = { -5f, 0f, 5f }; // Left, Middle, Right positions
@@ -23,7 +23,6 @@ public class SpawnManager : MonoBehaviour
 
     void Awake()
     {
-        // Đảm bảo GameObject là root để DontDestroyOnLoad hoạt động
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
     }

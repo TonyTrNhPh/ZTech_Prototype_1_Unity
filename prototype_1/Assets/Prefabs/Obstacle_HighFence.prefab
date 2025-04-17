@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6659114707373590503}
   m_Layer: 0
   m_Name: Quad
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
