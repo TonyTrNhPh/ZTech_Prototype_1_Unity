@@ -20,20 +20,32 @@ public class CoinScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        SpinAround();
         if (GameManager.Instance.IsGameOver()) return;
         Move();
+    }
+
+    private void Update()
+    {
+        SpinAround();
+        if (GameManager.Instance.IsGameOver()) return;
         DestroyOutBound();
     }
 
     void SpinAround()
     {
-        transform.Rotate(0, 0, spinSpeed * Time.fixedDeltaTime, Space.Self);
+        if (GameManager.Instance.FPS60)
+            transform.Rotate(0, 0, spinSpeed * Time.fixedDeltaTime, Space.Self);
+        else
+            transform.Rotate(0, 0, spinSpeed * Time.deltaTime, Space.Self);
+
     }
 
     void Move()
     {
-        transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
+        if (GameManager.Instance.FPS60)
+            transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
+        else
+            transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
     }
 
     void DestroyOutBound()

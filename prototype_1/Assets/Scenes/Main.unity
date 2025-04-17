@@ -308,8 +308,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604500405}
-        m_TargetAssemblyTypeName: ScreenManager, Assembly-CSharp
+      - m_Target: {fileID: 650738950}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ReturnToMenuButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -1359,56 +1359,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d80c7433031fdee44bf3910c4b046ce7, type: 3}
---- !u!1 &604500403
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 604500404}
-  - component: {fileID: 604500405}
-  m_Layer: 0
-  m_Name: Screen Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &604500404
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604500403}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.528372, y: 3.4846916, z: -8.17857}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &604500405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604500403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ba06eea2b3bcf2489f6b5d0e816a2cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 901107192}
-  coinText: {fileID: 902254881}
-  multipleText: {fileID: 1078596666}
-  gameOverPanel: {fileID: 1509431747}
-  gamePlayingPanel: {fileID: 229316040}
-  gameStartPanel: {fileID: 1944721064}
 --- !u!1 &634320044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,6 +1522,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   scorePer: 0.2
+  FPS60: 0
+  scoreText: {fileID: 901107192}
+  coinText: {fileID: 902254881}
+  multipleText: {fileID: 1078596666}
+  gameOverPanel: {fileID: 1509431747}
+  gamePlayingPanel: {fileID: 229316040}
+  gameStartPanel: {fileID: 1944721064}
 --- !u!1001 &655019943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2079,8 +2036,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604500405}
-        m_TargetAssemblyTypeName: ScreenManager, Assembly-CSharp
+      - m_Target: {fileID: 650738950}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ExitButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -3292,8 +3249,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604500405}
-        m_TargetAssemblyTypeName: ScreenManager, Assembly-CSharp
+      - m_Target: {fileID: 650738950}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -3430,8 +3387,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604500405}
-        m_TargetAssemblyTypeName: ScreenManager, Assembly-CSharp
+      - m_Target: {fileID: 650738950}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -4078,7 +4035,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 650738949}
   - {fileID: 360040528}
-  - {fileID: 604500404}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}

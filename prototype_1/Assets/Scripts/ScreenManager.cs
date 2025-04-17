@@ -69,7 +69,8 @@ public class ScreenManager : MonoBehaviour
 
     public void RestartButtonPressed()
     {
-        GameManager.Instance.ResetGame();
+        ResetUI();
+        GameManager.Instance.HandleRestartGame();
     }
 
     public void ReturnToMenuButtonPressed()
@@ -81,4 +82,13 @@ public class ScreenManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ResetUI()
+    {
+        UpdateCoinUI(0);
+        UpdateScoreUI(0);
+        UpdateMultipleUI(1);
+    }
+
+    
 }

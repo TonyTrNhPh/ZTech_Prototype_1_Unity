@@ -9,12 +9,20 @@ public class FenceScript : MonoBehaviour
     {
         if (GameManager.Instance.IsGameOver()) return;
         Move();
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.IsGameOver()) return;
         DestroyOutBound();
     }
 
     void Move()
     {
-        transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
+        if (GameManager.Instance.FPS60)
+            transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
+        else
+            transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
     }
 
     void DestroyOutBound()

@@ -43,36 +43,48 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        PlayerInput();
+        if (GameManager.Instance.IsGamePlaying())
+        {
+            PlayerInput();
+        }
     }
 
     private void HandleGameStateChanged(GameState state)
     {
         if (state == GameState.Playing)
         {
+            
             currentPos = 0;
             isFreeze = false;
             isOnGround = true;
             isRolling = false;
             playerAnim.SetBool("Death_b", false);
+            playerAnim.SetBool("Roll_b", false);
+            playerAnim.SetBool("Jump_b", false);
             playerAnim.SetFloat("Speed_f", 1f);
+            playerAnim.SetBool("Static_b", true);
             dirtParti.Play();
-            transform.position = new Vector3(xMiddleRail, transform.position.y, -10f); 
         }
         else if (state == GameState.GameOver)
         {
-            dirtParti.Stop();
             isFreeze = true;
-            playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
-            playerAnim.SetFloat("Speed_f", 0f);
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetFloat("Speed_f", 0);
+            dirtParti.Stop();
         }
         else if (state == GameState.Start)
         {
-            isFreeze = true;
-            dirtParti.Stop();
+            currentPos = 0;
+            isFreeze = false;
+            isOnGround = true;
+            isRolling = false;
             playerAnim.SetBool("Death_b", false);
-            playerAnim.SetFloat("Speed_f", 0f);
+            playerAnim.SetBool("Roll_b", false);
+            playerAnim.SetBool("Jump_b", false);
+            playerAnim.SetFloat("Speed_f", 0.3f);
+            playerAnim.SetBool("Static_b", true);
+            dirtParti.Stop();
         }
     }
 
@@ -156,11 +168,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-            dirtParti.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            GameManager.Instance.TriggerGameOver();
+            GameManager.Instance.UpdateGameState(GameState.GameOver);
         }
     }
 }
