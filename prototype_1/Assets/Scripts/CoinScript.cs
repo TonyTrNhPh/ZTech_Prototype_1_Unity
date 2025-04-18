@@ -8,12 +8,11 @@ public class CoinScript : MonoBehaviour
     public float speed = 30f;
 
     [Header("Particle settings")]
-    private ParticleSystem coinParti;
     public float particleDuration = 0.2f;
 
     void Start()
     {
-        coinParti = GetComponentInChildren<ParticleSystem>();
+
     }
 
     void FixedUpdate()
