@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dirtParti;
 
     private int currentPos = 0;
-    private float rollDuration = 0.7f;
+    private float rollDuration = 0.3f;
     private float rollTimer = 0f;
     private bool isOnGround = true;
     private bool isRolling = false;
@@ -149,8 +149,8 @@ public class PlayerController : MonoBehaviour
         {
             isRolling = true;
             rollTimer = 0f;
-            StartCoroutine(ReduceColliderHeight(0.35f));
             playerAnim.SetTrigger("Roll_trig");
+            StartCoroutine(ReduceColliderHeight(0.35f));
             dirtParti.Stop();
         }
 
