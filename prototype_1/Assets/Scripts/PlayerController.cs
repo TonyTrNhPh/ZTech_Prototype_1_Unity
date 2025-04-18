@@ -15,18 +15,20 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dirtParti;
 
     private int currentPos = 0;
-    private float rollDuration = 0.7f;
+    private float rollDuration = 0.3f;
     private float rollTimer = 0f;
     private bool isOnGround = true;
     private bool isRolling = false;
     private bool isFreeze = false;
     private Rigidbody playerRb;
     private Animator playerAnim;
+    private BoxCollider playerCol;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
+        playerCol = GetComponent<BoxCollider>();
         Physics.gravity *= gravityModifier;
         GameManager.OnGameStateChanged += HandleGameStateChanged;
     }
@@ -43,36 +45,48 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        PlayerInput();
+        if (GameManager.Instance.IsGamePlaying())
+        {
+            PlayerInput();
+        }
     }
 
     private void HandleGameStateChanged(GameState state)
     {
         if (state == GameState.Playing)
         {
+            
             currentPos = 0;
             isFreeze = false;
             isOnGround = true;
             isRolling = false;
             playerAnim.SetBool("Death_b", false);
+            playerAnim.SetBool("Roll_b", false);
+            playerAnim.SetBool("Jump_b", false);
             playerAnim.SetFloat("Speed_f", 1f);
+            playerAnim.SetBool("Static_b", true);
             dirtParti.Play();
-            transform.position = new Vector3(xMiddleRail, transform.position.y, -10f); 
         }
         else if (state == GameState.GameOver)
         {
-            dirtParti.Stop();
             isFreeze = true;
-            playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
-            playerAnim.SetFloat("Speed_f", 0f);
+            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetFloat("Speed_f", 0);
+            dirtParti.Stop();
         }
         else if (state == GameState.Start)
         {
-            isFreeze = true;
-            dirtParti.Stop();
+            currentPos = 0;
+            isFreeze = false;
+            isOnGround = true;
+            isRolling = false;
             playerAnim.SetBool("Death_b", false);
-            playerAnim.SetFloat("Speed_f", 0f);
+            playerAnim.SetBool("Roll_b", false);
+            playerAnim.SetBool("Jump_b", false);
+            playerAnim.SetFloat("Speed_f", 0.3f);
+            playerAnim.SetBool("Static_b", true);
+            dirtParti.Stop();
         }
     }
 
@@ -136,6 +150,7 @@ public class PlayerController : MonoBehaviour
             isRolling = true;
             rollTimer = 0f;
             playerAnim.SetTrigger("Roll_trig");
+            StartCoroutine(ReduceColliderHeight(0.35f));
             dirtParti.Stop();
         }
 
@@ -156,11 +171,19 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
-            dirtParti.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            GameManager.Instance.TriggerGameOver();
+            GameManager.Instance.UpdateGameState(GameState.GameOver);
         }
+    }
+
+    private IEnumerator ReduceColliderHeight(float duration)
+    {
+        playerCol.center = new Vector3(0, 0.8f, 0);
+        playerCol.size = new Vector3(1.2f, 1.5f, 1);
+        yield return new WaitForSeconds(duration);
+        playerCol.center = new Vector3(0, 1.5f, 0);
+        playerCol.size = new Vector3(1.2f, 3f, 1);
     }
 }

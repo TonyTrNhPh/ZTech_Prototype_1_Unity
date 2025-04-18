@@ -5,7 +5,12 @@ public class RoadScript : MonoBehaviour
     public float zBound = -15;
     public float speed = 20f;
 
-    void FixedUpdate()
+    //void FixedUpdate()
+    //{
+    //    if (GameManager.Instance.IsGameOver()) return;
+    //}
+
+    private void Update()
     {
         if (GameManager.Instance.IsGameOver()) return;
         Move();
@@ -13,7 +18,13 @@ public class RoadScript : MonoBehaviour
     }
     void Move()
     {
-        transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
+        if (!GameManager.Instance.IsGameStart())
+        {
+            if (GameManager.Instance.FPS60)
+                transform.position += new Vector3(0, 0, -speed * Time.fixedDeltaTime);
+            else
+                transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
+        }
     }
     void RepeatOutBound()
     {
