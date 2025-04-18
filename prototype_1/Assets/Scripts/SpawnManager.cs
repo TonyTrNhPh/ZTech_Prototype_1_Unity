@@ -6,7 +6,10 @@ public class SpawnManager : MonoBehaviour
     [Header("Prefabs")]
     public GameObject[] obstaclePrefabs; // Array of obstacle prefabs
     public GameObject[] coinPrefabs;     // Array of coin prefabs
-
+    public GameObject[] doubleScorePrefab;
+    public GameObject[] magnetItemPrefab;
+    public GameObject[] shieldItemPrefab;
+    public int magnetSpawnChance = 2; 
     [Header("Spawn Settings")]
     public float startDelay = 2f;        // Initial delay before spawning starts
     public float repeatRate = 2f;        // Time between spawns
@@ -91,6 +94,41 @@ public class SpawnManager : MonoBehaviour
             SpawnObstacle(railIndex);
         }
 
+       
+        int maxDoubleScore = xSpawnPos.Length - 1; 
+        int DoubleScoreCount = Random.Range(0, maxDoubleScore + 1); 
+        bool[] railBlockedForDoubleScore = new bool[xSpawnPos.Length]; 
+
+        
+        for (int i = 0; i < DoubleScoreCount; i++)
+        {
+            int railIndex;
+            do
+            {
+                railIndex = Random.Range(0, xSpawnPos.Length); 
+            } while (railBlockedForDoubleScore[railIndex]);
+
+            railBlockedForDoubleScore[railIndex] = true;
+            SpawnDoubleScore(railIndex);
+        }
+
+        int maxMagent = xSpawnPos.Length - 1;
+        int MagentCount = Random.Range(0, maxMagent + 1);
+        bool[] railBlockedForMagent = new bool[xSpawnPos.Length];
+        if(MagentCount< magnetSpawnChance)
+        for (int i = 0; i < MagentCount; i++)
+        {
+            int railIndex;
+            do
+            {
+                railIndex = Random.Range(0, xSpawnPos.Length);
+            } while (railBlockedForMagent[railIndex] && railBlockedForDoubleScore[railIndex]);
+
+            railBlockedForMagent[railIndex] = true;
+            SpawnMagnetItem(railIndex);
+        }
+
+
         // Step 3: Spawn a coin row on a random unblocked rail
         int unblockedRailCount = 0;
         int[] unblockedRails = new int[xSpawnPos.Length];
@@ -117,6 +155,30 @@ public class SpawnManager : MonoBehaviour
         float xPos = xSpawnPos[railIndex];
         Vector3 spawnPos = new Vector3(xPos, 0f, spawnZPosition);
         Instantiate(obstaclePrefabs[obstacleType], spawnPos, obstaclePrefabs[obstacleType].transform.rotation);
+    }
+
+    private void SpawnDoubleScore(int railIndex)
+    {
+        int DoubleScoreType = Random.Range(0, doubleScorePrefab.Length); 
+        float xPos = xSpawnPos[railIndex];
+        Vector3 spawnPos = new Vector3(xPos, 1f, spawnZPosition);
+        Instantiate(doubleScorePrefab[DoubleScoreType], spawnPos, doubleScorePrefab[DoubleScoreType].transform.rotation);
+    }
+
+    private void SpawnMagnetItem(int railIndex)
+    {
+        int MagnetItemType = Random.Range(0,magnetItemPrefab.Length);
+        float xPos = xSpawnPos[railIndex];
+        Vector3 spawnPos = new Vector3(xPos, 1f, spawnZPosition);
+        Instantiate(magnetItemPrefab[MagnetItemType], spawnPos, magnetItemPrefab[MagnetItemType].transform.rotation);
+    }
+
+    private void SpawnshieldItem(int railIndex)
+    {
+        int shieldItemType = Random.Range(0, shieldItemPrefab.Length);
+        float xPos = xSpawnPos[railIndex];
+        Vector3 spawnPos = new Vector3(xPos, 1f, spawnZPosition);
+        Instantiate(shieldItemPrefab[shieldItemType], spawnPos, shieldItemPrefab[shieldItemType].transform.rotation);
     }
 
     private void SpawnCoinRow(int railIndex)

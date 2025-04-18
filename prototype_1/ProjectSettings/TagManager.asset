@@ -8,6 +8,8 @@ TagManager:
   - Obstacle
   - Safe
   - Coin
+  - DoubleScrore
+  - Magent
   layers:
   - Default
   - TransparentFX
