@@ -24,11 +24,20 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private BoxCollider playerCol;
 
+    [Header("Audio")]
+    public AudioSource audioSource; 
+    public AudioClip jumpSound; 
+    public AudioClip rollSound; 
+    public AudioClip deathSound; 
+
+    private bool isShieldActive = false;
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         playerCol = GetComponent<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
         GameManager.OnGameStateChanged += HandleGameStateChanged;
     }
@@ -143,6 +152,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
             dirtParti.Stop();
+            audioSource.PlayOneShot(jumpSound);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling)
@@ -162,6 +172,7 @@ public class PlayerController : MonoBehaviour
                 isRolling = false;
                 rollTimer = 0f;
                 playerAnim.SetBool("Roll_b", false);
+                audioSource.PlayOneShot(rollSound);
             }
         }
     }
@@ -172,10 +183,20 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle") )
         {
-            GameManager.Instance.UpdateGameState(GameState.GameOver);
+            if (isShieldActive) // Kiểm tra nếu Shield đang hoạt động
+            {
+                isShieldActive = false; // Tắt Shield sau khi sử dụng
+                Destroy(collision.gameObject); // Phá hủy chướng ngại vật
+                return; // Kết thúc xử lý va chạm
+            }
+            GameManager.Instance.UpdateGameState(GameState.GameOver); // Kết thúc trò chơi
         }
+    }
+    public void EnableShield()
+    {
+        isShieldActive = true; // Kích hoạt Shield
     }
 
     private IEnumerator ReduceColliderHeight(float duration)

@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
-
-public class DoubleScore : MonoBehaviour
+public class ShieldScript: MonoBehaviour
 {
     [Header("DoubleScore settings")]
     public float spinSpeed = 180f;
     public float zBound = -35;
     public float speed = 20f;
     [Header("Particle settings")]
-    private ParticleSystem DoubleScoreParti;
+    private ParticleSystem ShieldParti;
     public float particleDuration = 0.2f;
+
+    
+    private PlayerController playerController;
     void Start()
     {
-        DoubleScoreParti = GetComponentInChildren<ParticleSystem>();
+        ShieldParti = GetComponentInChildren<ParticleSystem>();
+        GameObject player = GameObject.FindWithTag("Player");
     }
+
     void FixedUpdate()
     {
         SpinAround();
@@ -38,8 +42,12 @@ public class DoubleScore : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.ActivateDoubleScore();
-            Destroy(gameObject);
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.EnableShield(); // Kích hoạt Shield cho Player
+            }
+            Destroy(gameObject); // Hủy vật phẩm Shield sau khi nhặt
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class GameManager : MonoBehaviour
     private bool gameOver = false;
     private bool gameStart = true;
     private bool gamePlaying = false;
-
+    private int doubleScore = 0;
+    private bool magent = false;
     [Header("UI Elements")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinText;
@@ -156,10 +158,63 @@ public class GameManager : MonoBehaviour
     {
         if (!gameOver)
         {
-            score += scoreToAdd * multiple;
+            int finalMultiple = multiple;
+
+            // Double the score if doubleScore is active
+            if (doubleScore > 0)
+            {
+                finalMultiple *= (int)Mathf.Pow(2, doubleScore);
+            }
+
+            score += scoreToAdd * finalMultiple;
             UpdateScoreUI(score);
         }
     }
+
+    public void ActivateDoubleScore()
+    {
+        if (!gameOver)
+        {
+            doubleScore++; // Tăng giá trị doubleScore để kích hoạt hiệu ứng x2
+            UpdateMultiple();
+            StartCoroutine(DoubleScoreDuration());
+        }
+    }
+
+    private void UpdateMultiple()
+    {
+        int multiple = (int)Mathf.Pow(2, doubleScore); // Tính giá trị multiple dựa trên số lần x2
+        UpdateMultipleUI(multiple); // Cập nhật UI
+    }
+
+    private IEnumerator DoubleScoreDuration()
+    {
+        yield return new WaitForSeconds(5f); // Hiệu ứng x2 kéo dài 5 giây
+        doubleScore--; // Hết thời gian, tắt hiệu ứng x2
+        UpdateMultiple();
+    }
+
+    public void ActivateMagnet()
+    {
+        if (!gameOver)
+        {
+            magent = true; // Tăng số lượng Magnet
+            StartCoroutine(MagnetDuration());
+        }
+    }
+
+    private IEnumerator MagnetDuration()
+    {
+        yield return new WaitForSeconds(5f);
+        magent = false;
+    }
+
+    public bool IsMagnetActive()
+    {
+        return magent ;
+    }
+
+
 
     public void UpdateCoin()
     {

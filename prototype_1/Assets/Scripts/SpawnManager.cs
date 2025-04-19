@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
     [Header("Prefabs")]
     public GameObject[] obstaclePrefabs; // Array of obstacle prefabs
     public GameObject[] coinPrefabs;     // Array of coin prefabs
-
+    public GameObject[] powerUpPrefabs; 
     [Header("Spawn Settings")]
     public float startDelay = 1f;        // Initial delay before spawning starts
     public float repeatRate = 1f;        // Time between spawns
@@ -90,6 +90,8 @@ public class SpawnManager : MonoBehaviour
             SpawnObstacle(railIndex);
         }
 
+
+
         // Step 3: Spawn a coin row on a random unblocked rail
         int unblockedRailCount = 0;
         int[] unblockedRails = new int[xSpawnPos.Length];
@@ -108,6 +110,15 @@ public class SpawnManager : MonoBehaviour
             int coinRailIndex = unblockedRails[Random.Range(0, unblockedRailCount)];
             SpawnCoinRow(coinRailIndex);
         }
+
+        // Step 4: Spawn a power-up on a random unblocked rail
+        int powerUpRailIndex = Random.Range(0, xSpawnPos.Length);
+        while (railBlocked[powerUpRailIndex]) // Ensure the rail is not blocked
+        {
+            powerUpRailIndex = Random.Range(0, xSpawnPos.Length);
+        }
+        SpawnPowerUp(powerUpRailIndex);
+
     }
 
     private void SpawnObstacle(int railIndex)
@@ -116,6 +127,14 @@ public class SpawnManager : MonoBehaviour
         float xPos = xSpawnPos[railIndex];
         Vector3 spawnPos = new Vector3(xPos, 0f, spawnZPosition);
         Instantiate(obstaclePrefabs[obstacleType], spawnPos, obstaclePrefabs[obstacleType].transform.rotation);
+    }
+
+    private void SpawnPowerUp(int railIdex)
+    {
+        int powerUpType = Random.Range(0, powerUpPrefabs.Length); 
+        float xPos = xSpawnPos[railIdex];
+        Vector3 spawnPos = new Vector3(xPos, 1f, spawnZPosition);
+        Instantiate(powerUpPrefabs[powerUpType], spawnPos, powerUpPrefabs[powerUpType].transform.rotation);
     }
 
     private void SpawnCoinRow(int railIndex)

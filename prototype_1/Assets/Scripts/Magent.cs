@@ -40,7 +40,7 @@ public class Magnet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Kích hoạt hiệu ứng nam châm
-            //GameManager.Instance.ActivateMagnet();
+            GameManager.Instance.ActivateMagnet();
             Destroy(gameObject); 
         }
     }

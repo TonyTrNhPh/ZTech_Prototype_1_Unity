@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
@@ -10,15 +10,33 @@ public class CoinScript : MonoBehaviour
     [Header("Particle settings")]
     public float particleDuration = 0.2f;
 
+    private Transform playerTransform; // Vị trí của người chơi
+    public float moveSpeed = 30f;      // Tốc độ di chuyển của coin khi bị hút
     void Start()
     {
-
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Tìm đối tượng người chơi
     }
 
     void FixedUpdate()
     {
         if (GameManager.Instance.IsGameOver()) return;
+        coinMove();
         Move();
+    }
+
+    void coinMove()
+    {
+        if (GameManager.Instance.IsMagnetActive())
+        {
+            float magnetRange = 10f; // Phạm vi hút coin (có thể điều chỉnh)
+            float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
+
+            if (distanceToPlayer <= magnetRange) // Chỉ hút coin trong phạm vi
+            {
+                Vector3 direction = (playerTransform.position - transform.position).normalized;
+                transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.fixedDeltaTime);
+            }
+        }
     }
 
     private void Update()
