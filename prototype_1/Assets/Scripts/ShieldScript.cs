@@ -46,6 +46,7 @@ public class ShieldScript: MonoBehaviour
             if (player != null)
             {
                 player.EnableShield(); // Kích hoạt Shield cho Player
+
             }
             Destroy(gameObject); // Hủy vật phẩm Shield sau khi nhặt
         }

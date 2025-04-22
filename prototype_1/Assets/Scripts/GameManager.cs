@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI multipleText;
+    public TextMeshProUGUI activePowerUpsText;
     public GameObject gameOverPanel;
     public GameObject gamePlayingPanel;
     public GameObject gameStartPanel;
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
         UpdateMultipleUI(1);
+        UpdateActivePowerUpsUI();
 
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
@@ -109,6 +111,7 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
         UpdateMultipleUI(1);
+        UpdateActivePowerUpsUI();
         StartCoroutine(IncreaseScoreOverTime(scorePer));
     }
 
@@ -129,7 +132,7 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI(0);
         UpdateCoinUI(0);
         UpdateMultipleUI(1);
-
+        UpdateActivePowerUpsUI();
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
         {
@@ -178,6 +181,7 @@ public class GameManager : MonoBehaviour
             doubleScore++; // Tăng giá trị doubleScore để kích hoạt hiệu ứng x2
             UpdateMultiple();
             StartCoroutine(DoubleScoreDuration());
+            UpdateActivePowerUpsUI(); 
         }
     }
 
@@ -192,6 +196,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5f); // Hiệu ứng x2 kéo dài 5 giây
         doubleScore--; // Hết thời gian, tắt hiệu ứng x2
         UpdateMultiple();
+        UpdateActivePowerUpsUI(); 
     }
 
     public void ActivateMagnet()
@@ -200,6 +205,7 @@ public class GameManager : MonoBehaviour
         {
             magent = true; // Tăng số lượng Magnet
             StartCoroutine(MagnetDuration());
+            UpdateActivePowerUpsUI(); 
         }
     }
 
@@ -207,12 +213,15 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         magent = false;
+        UpdateActivePowerUpsUI();
     }
 
     public bool IsMagnetActive()
     {
         return magent ;
     }
+
+   
 
 
 
@@ -253,6 +262,31 @@ public class GameManager : MonoBehaviour
     private void UpdateMultipleUI(int multiple)
     {
         multipleText.text = "x" + multiple;
+    }
+
+    private void UpdateActivePowerUpsUI()
+    {
+        string activePowerUps = "";
+
+        // Kiểm tra trạng thái của từng power-up
+        if (doubleScore > 0)
+        {
+            activePowerUps += "X2\n";
+        }
+
+        if (magent)
+        {
+            activePowerUps += "Magnet\n";
+        }
+        PlayerController player = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
+        if (player != null && player.ShieldActive())
+        {
+            activePowerUps += "Shield\n";
+        }
+
+
+        // Cập nhật UI
+        activePowerUpsText.text = activePowerUps;
     }
 
     public void StartButtonPressed()

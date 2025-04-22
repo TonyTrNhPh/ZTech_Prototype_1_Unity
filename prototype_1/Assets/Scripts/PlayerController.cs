@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
-        else if (collision.gameObject.CompareTag("Obstacle") )
+        else if (collision.gameObject.CompareTag("Obstacle"))
         {
             if (isShieldActive) // Kiểm tra nếu Shield đang hoạt động
             {
@@ -193,6 +193,12 @@ public class PlayerController : MonoBehaviour
             }
             GameManager.Instance.UpdateGameState(GameState.GameOver); // Kết thúc trò chơi
         }
+    }
+
+
+    public bool ShieldActive()
+    {
+        return isShieldActive; 
     }
     public void EnableShield()
     {

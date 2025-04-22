@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     public float coinHeight = 1f;        // Height for coins (on the ground)
 
     private Coroutine spawnCoroutine;
-
+    
     void Awake()
     {
         transform.SetParent(null);
@@ -111,15 +111,25 @@ public class SpawnManager : MonoBehaviour
             SpawnCoinRow(coinRailIndex);
         }
 
+
+
         // Step 4: Spawn a power-up on a random unblocked rail
         int powerUpRailIndex = Random.Range(0, xSpawnPos.Length);
-        while (railBlocked[powerUpRailIndex]) // Ensure the rail is not blocked
+        float spawnChance = 0.3f;
+        if(Random.value < spawnChance)
         {
-            powerUpRailIndex = Random.Range(0, xSpawnPos.Length);
+            while (railBlocked[powerUpRailIndex]) // Ensure the rail is not blocked
+            {
+
+                powerUpRailIndex = Random.Range(0, xSpawnPos.Length);
+            }
+            SpawnPowerUp(powerUpRailIndex);
         }
-        SpawnPowerUp(powerUpRailIndex);
 
     }
+
+ 
+   
 
     private void SpawnObstacle(int railIndex)
     {
