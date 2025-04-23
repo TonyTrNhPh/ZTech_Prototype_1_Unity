@@ -99,6 +99,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(coin);
         }
+        GameObject[] PowerUps = GameObject.FindGameObjectsWithTag("PowerUp");
+        foreach (GameObject PowerUp in PowerUps)
+        {
+            Destroy(PowerUp);
+        }
     }
 
     private void HandleGamePlayingScreen()
@@ -143,6 +148,12 @@ public class GameManager : MonoBehaviour
         foreach (GameObject coin in coins)
         {
             Destroy(coin);
+        }
+
+        GameObject[] PowerUps = GameObject.FindGameObjectsWithTag("PowerUp");
+        foreach (GameObject PowerUp in PowerUps)
+        {
+            Destroy(PowerUp);
         }
 
         UpdateGameState(GameState.Playing);
@@ -264,10 +275,10 @@ public class GameManager : MonoBehaviour
         multipleText.text = "x" + multiple;
     }
 
-    private void UpdateActivePowerUpsUI()
+    public void UpdateActivePowerUpsUI()
     {
         string activePowerUps = "";
-
+        PlayerController player = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
         // Kiểm tra trạng thái của từng power-up
         if (doubleScore > 0)
         {
@@ -278,7 +289,7 @@ public class GameManager : MonoBehaviour
         {
             activePowerUps += "Magnet\n";
         }
-        PlayerController player = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
+        
         if (player != null && player.ShieldActive())
         {
             activePowerUps += "Shield\n";

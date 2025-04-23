@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
             if (isShieldActive) // Kiểm tra nếu Shield đang hoạt động
             {
                 isShieldActive = false; // Tắt Shield sau khi sử dụng
+                GameManager.Instance.UpdateActivePowerUpsUI(); 
                 Destroy(collision.gameObject); // Phá hủy chướng ngại vật
                 return; // Kết thúc xử lý va chạm
             }

@@ -115,7 +115,7 @@ public class SpawnManager : MonoBehaviour
 
         // Step 4: Spawn a power-up on a random unblocked rail
         int powerUpRailIndex = Random.Range(0, xSpawnPos.Length);
-        float spawnChance = 0.3f;
+        float spawnChance = 0.1f;
         if(Random.value < spawnChance)
         {
             while (railBlocked[powerUpRailIndex]) // Ensure the rail is not blocked
