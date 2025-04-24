@@ -181,26 +181,26 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            if (!isRolling) dirtParti.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            if (GameManager.Instance.IsShieldActive()) // Kiểm tra nếu Shield đang hoạt động
+            if (!GameManager.Instance.IsShieldActive())
             {
-                GameObject obstacleParent = collision.gameObject.transform.parent.gameObject;
-                Destroy(obstacleParent);
-                GameManager.Instance.DisableShield();
-                GameManager.Instance.UpdateActivePowerUpsUI();
+                GameManager.Instance.UpdateGameState(GameState.GameOver);
             }
-            else GameManager.Instance.UpdateGameState(GameState.GameOver); 
-        }
-        else if (collision.gameObject.CompareTag("Safe"))
-        {
-            if (GameManager.Instance.IsShieldActive()) 
+            else
             {
-                GameManager.Instance.DisableShield();
-                GameManager.Instance.UpdateActivePowerUpsUI();
+                StartCoroutine(StartInvulnerability(0.1f));
             }
         }
+    }
+
+    private IEnumerator StartInvulnerability(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        GameManager.Instance.DisableShield();
+        GameManager.Instance.UpdateActivePowerUpsUI();
     }
 
 

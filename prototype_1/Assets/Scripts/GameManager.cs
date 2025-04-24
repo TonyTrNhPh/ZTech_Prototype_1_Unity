@@ -134,6 +134,9 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = false;
         gamePlaying = true;
+        shield = false;
+        doubleScore = 0;
+        magent = false;
 
         UpdateScoreUI(0);
         UpdateCoinUI(0);
@@ -175,7 +178,6 @@ public class GameManager : MonoBehaviour
         {
             int finalMultiple = multiple;
 
-            // Double the score if doubleScore is active
             if (doubleScore > 0)
             {
                 finalMultiple *= (int)Mathf.Pow(2, doubleScore);
@@ -232,10 +234,6 @@ public class GameManager : MonoBehaviour
     {
         return magent ;
     }
-
-   
-
-
 
     public void UpdateCoin()
     {
