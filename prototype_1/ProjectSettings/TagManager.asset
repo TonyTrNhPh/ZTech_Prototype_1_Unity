@@ -10,6 +10,8 @@ TagManager:
   - Coin
   - DoubleScrore
   - Magent
+  - PowerUp
+  - Obstacle_Parrent
   layers:
   - Default
   - TransparentFX

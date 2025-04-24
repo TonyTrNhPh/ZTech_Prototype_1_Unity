@@ -11,12 +11,9 @@ public class ShieldScript: MonoBehaviour
     private ParticleSystem ShieldParti;
     public float particleDuration = 0.2f;
 
-    
-    private PlayerController playerController;
     void Start()
     {
         ShieldParti = GetComponentInChildren<ParticleSystem>();
-        GameObject player = GameObject.FindWithTag("Player");
     }
 
     void FixedUpdate()
@@ -42,14 +39,9 @@ public class ShieldScript: MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                player.EnableShield(); // Kích hoạt Shield cho Player
-                GameManager.Instance.UpdateActivePowerUpsUI();
-
-            }
-            Destroy(gameObject); // Hủy vật phẩm Shield sau khi nhặt
+            Destroy(gameObject);
+            GameManager.Instance.EnableShield();
+            GameManager.Instance.UpdateActivePowerUpsUI();
         }
     }
 }

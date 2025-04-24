@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip rollSound; 
     public AudioClip deathSound; 
 
-    private bool isShieldActive = false;
 
     void Start()
     {
@@ -185,26 +184,25 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            if (isShieldActive) // Kiểm tra nếu Shield đang hoạt động
+            if (GameManager.Instance.IsShieldActive()) // Kiểm tra nếu Shield đang hoạt động
             {
-                isShieldActive = false; // Tắt Shield sau khi sử dụng
-                GameManager.Instance.UpdateActivePowerUpsUI(); 
-                Destroy(collision.gameObject); // Phá hủy chướng ngại vật
-                return; // Kết thúc xử lý va chạm
+                GameObject obstacleParent = collision.gameObject.transform.parent.gameObject;
+                Destroy(obstacleParent);
+                GameManager.Instance.DisableShield();
+                GameManager.Instance.UpdateActivePowerUpsUI();
             }
-            GameManager.Instance.UpdateGameState(GameState.GameOver); // Kết thúc trò chơi
+            else GameManager.Instance.UpdateGameState(GameState.GameOver); 
+        }
+        else if (collision.gameObject.CompareTag("Safe"))
+        {
+            if (GameManager.Instance.IsShieldActive()) 
+            {
+                GameManager.Instance.DisableShield();
+                GameManager.Instance.UpdateActivePowerUpsUI();
+            }
         }
     }
 
-
-    public bool ShieldActive()
-    {
-        return isShieldActive; 
-    }
-    public void EnableShield()
-    {
-        isShieldActive = true; // Kích hoạt Shield
-    }
 
     private IEnumerator ReduceColliderHeight(float duration)
     {

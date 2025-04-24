@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private bool gamePlaying = false;
     private int doubleScore = 0;
     private bool magent = false;
+    private bool shield = false;
     [Header("UI Elements")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinText;
@@ -260,6 +261,21 @@ public class GameManager : MonoBehaviour
         return gamePlaying;
     }
 
+    public bool IsShieldActive()
+    {
+        return shield;
+    }
+
+    public void EnableShield()
+    {
+        shield = true; 
+    }
+
+    public void DisableShield()
+    {
+        shield = false;
+    }
+
     private void UpdateScoreUI(int score)
     {
         scoreText.text = score.ToString("000000");
@@ -278,8 +294,6 @@ public class GameManager : MonoBehaviour
     public void UpdateActivePowerUpsUI()
     {
         string activePowerUps = "";
-        PlayerController player = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
-        // Kiểm tra trạng thái của từng power-up
         if (doubleScore > 0)
         {
             activePowerUps += "X2\n";
@@ -290,7 +304,7 @@ public class GameManager : MonoBehaviour
             activePowerUps += "Magnet\n";
         }
         
-        if (player != null && player.ShieldActive())
+        if (shield)
         {
             activePowerUps += "Shield\n";
         }
