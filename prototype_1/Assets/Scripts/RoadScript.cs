@@ -5,11 +5,6 @@ public class RoadScript : MonoBehaviour
     public float zBound = -15;
     public float speed = 20f;
 
-    //void FixedUpdate()
-    //{
-    //    if (GameManager.Instance.IsGameOver()) return;
-    //}
-
     private void Update()
     {
         if (GameManager.Instance.IsGameOver()) return;

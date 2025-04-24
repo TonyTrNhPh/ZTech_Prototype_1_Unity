@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private int doubleScore = 0;
     private bool magent = false;
     private bool shield = false;
+
     [Header("UI Elements")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinText;
@@ -29,6 +30,14 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject gamePlayingPanel;
     public GameObject gameStartPanel;
+
+    [Header("Difficulty Settings")]
+    public float initialRepeatRate = 1f; // Giá trị ban đầu của repeatRate
+    public float minRepeatRate = 0.5f; // Giá trị nhỏ nhất của repeatRate
+    public float rateDecreaseInterval = 20f; // Giảm repeatRate mỗi 20 giây
+    public float rateDecreaseAmount = 0.1f; // Giảm 0.1 giây mỗi lần
+    private float currentRepeatRate; // Giá trị repeatRate hiện tại
+    private float timeSinceStart = 0f;
 
     void Awake()
     {
@@ -51,6 +60,19 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UpdateGameState(GameState.Start);
+    }
+
+    void FixedUpdate()
+    {
+        if (gamePlaying)
+        {
+            timeSinceStart += Time.fixedDeltaTime;
+            if (timeSinceStart >= rateDecreaseInterval)
+            {
+                currentRepeatRate = Mathf.Max(minRepeatRate, currentRepeatRate - rateDecreaseAmount);
+                timeSinceStart = 0f;
+            }
+        }
     }
 
     public void UpdateGameState(GameState newState)
@@ -84,6 +106,8 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = true;
         gamePlaying = false;
+        currentRepeatRate = initialRepeatRate; // Reset repeatRate
+        timeSinceStart = 0f;
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
         UpdateMultipleUI(1);
@@ -114,6 +138,8 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = false;
         gamePlaying = true;
+        currentRepeatRate = initialRepeatRate; // Reset repeatRate
+        timeSinceStart = 0f;
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
         UpdateMultipleUI(1);
@@ -137,6 +163,8 @@ public class GameManager : MonoBehaviour
         shield = false;
         doubleScore = 0;
         magent = false;
+        currentRepeatRate = initialRepeatRate; 
+        timeSinceStart = 0f;
 
         UpdateScoreUI(0);
         UpdateCoinUI(0);
@@ -172,6 +200,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float GetCurrentRepeatRate()
+    {
+        return currentRepeatRate;
+    }
     public void UpdateScore(int scoreToAdd, int multiple)
     {
         if (!gameOver)
@@ -192,34 +224,34 @@ public class GameManager : MonoBehaviour
     {
         if (!gameOver)
         {
-            doubleScore++; // Tăng giá trị doubleScore để kích hoạt hiệu ứng x2
+            doubleScore++;
             UpdateMultiple();
             StartCoroutine(DoubleScoreDuration());
-            UpdateActivePowerUpsUI(); 
+            UpdateActivePowerUpsUI();
         }
     }
 
     private void UpdateMultiple()
     {
-        int multiple = (int)Mathf.Pow(2, doubleScore); // Tính giá trị multiple dựa trên số lần x2
-        UpdateMultipleUI(multiple); // Cập nhật UI
+        int multiple = (int)Mathf.Pow(2, doubleScore);
+        UpdateMultipleUI(multiple);
     }
 
     private IEnumerator DoubleScoreDuration()
     {
-        yield return new WaitForSeconds(5f); // Hiệu ứng x2 kéo dài 5 giây
-        doubleScore--; // Hết thời gian, tắt hiệu ứng x2
+        yield return new WaitForSeconds(5f);
+        doubleScore--;
         UpdateMultiple();
-        UpdateActivePowerUpsUI(); 
+        UpdateActivePowerUpsUI();
     }
 
     public void ActivateMagnet()
     {
         if (!gameOver)
         {
-            magent = true; // Tăng số lượng Magnet
+            magent = true;
             StartCoroutine(MagnetDuration());
-            UpdateActivePowerUpsUI(); 
+            UpdateActivePowerUpsUI();
         }
     }
 
@@ -232,7 +264,7 @@ public class GameManager : MonoBehaviour
 
     public bool IsMagnetActive()
     {
-        return magent ;
+        return magent;
     }
 
     public void UpdateCoin()
@@ -266,12 +298,17 @@ public class GameManager : MonoBehaviour
 
     public void EnableShield()
     {
-        shield = true; 
+        shield = true;
     }
 
     public void DisableShield()
     {
         shield = false;
+    }
+
+    public float GetRepeatRate()
+    {
+        return currentRepeatRate;
     }
 
     private void UpdateScoreUI(int score)
@@ -301,14 +338,11 @@ public class GameManager : MonoBehaviour
         {
             activePowerUps += "Magnet\n";
         }
-        
+
         if (shield)
         {
             activePowerUps += "Shield\n";
         }
-
-
-        // Cập nhật UI
         activePowerUpsText.text = activePowerUps;
     }
 
@@ -329,7 +363,6 @@ public class GameManager : MonoBehaviour
 
     public void ExitButtonPressed()
     {
-        //Application.Quit();
         UnityEditor.EditorApplication.isPlaying = false;
     }
 }

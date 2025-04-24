@@ -9,7 +9,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] powerUpPrefabs; 
     [Header("Spawn Settings")]
     public float startDelay = 1f;        // Initial delay before spawning starts
-    public float repeatRate = 1f;        // Time between spawns
     public float coinSpacing = 2f;       // Distance between coins in a row (Z-axis)
     public float spawnZPosition = 40f;   // Z position where objects spawn
     public float[] xSpawnPos = { -5f, 0f, 5f }; // Left, Middle, Right positions
@@ -20,7 +19,8 @@ public class SpawnManager : MonoBehaviour
     public float coinHeight = 1f;        // Height for coins (on the ground)
 
     private Coroutine spawnCoroutine;
-    
+    private float repeatRate = 1f;
+
     void Awake()
     {
         transform.SetParent(null);
@@ -30,6 +30,12 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         GameManager.OnGameStateChanged += HandleGameStateChanged;
+        repeatRate = GameManager.Instance.initialRepeatRate; 
+    }
+
+    private void FixedUpdate()
+    {
+        repeatRate = GameManager.Instance.GetRepeatRate(); // Update repeatRate based on game state
     }
 
     void OnDestroy()
