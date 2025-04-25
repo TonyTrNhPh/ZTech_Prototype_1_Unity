@@ -32,11 +32,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameStartPanel;
 
     [Header("Difficulty Settings")]
-    public float initialRepeatRate = 1f; // Giá trị ban đầu của repeatRate
-    public float minRepeatRate = 0.5f; // Giá trị nhỏ nhất của repeatRate
-    public float rateDecreaseInterval = 20f; // Giảm repeatRate mỗi 20 giây
-    public float rateDecreaseAmount = 0.1f; // Giảm 0.1 giây mỗi lần
-    private float currentRepeatRate; // Giá trị repeatRate hiện tại
+    public float initialRepeatRate = 1f; 
+    public float minRepeatRate = 0.5f; 
+    public float rateDecreaseInterval = 20f; 
+    public float rateDecreaseAmount = 0.1f; 
+    private float currentRepeatRate;
     private float timeSinceStart = 0f;
 
     void Awake()
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = false;
         gamePlaying = true;
-        currentRepeatRate = initialRepeatRate; // Reset repeatRate
+        currentRepeatRate = initialRepeatRate; 
         timeSinceStart = 0f;
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
         shield = false;
         doubleScore = 0;
         magent = false;
-        currentRepeatRate = initialRepeatRate; 
+        currentRepeatRate = initialRepeatRate;
         timeSinceStart = 0f;
 
         UpdateScoreUI(0);
@@ -363,8 +363,7 @@ public class GameManager : MonoBehaviour
 
     public void ExitButtonPressed()
     {
-        //UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
 

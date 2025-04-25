@@ -10,11 +10,11 @@ public class CoinScript : MonoBehaviour
     [Header("Particle settings")]
     public float particleDuration = 0.2f;
 
-    private Transform playerTransform; // Vị trí của người chơi
-    public float moveSpeed = 30f;      // Tốc độ di chuyển của coin khi bị hút
+    private Transform playerTransform; 
+    public float moveSpeed = 30f;      
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Tìm đối tượng người chơi
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void FixedUpdate()
@@ -28,10 +28,10 @@ public class CoinScript : MonoBehaviour
     {
         if (GameManager.Instance.IsMagnetActive())
         {
-            float magnetRange = 10f; // Phạm vi hút coin (có thể điều chỉnh)
+            float magnetRange = 10f; 
             float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
 
-            if (distanceToPlayer <= magnetRange) // Chỉ hút coin trong phạm vi
+            if (distanceToPlayer <= magnetRange) 
             {
                 Vector3 direction = (playerTransform.position - transform.position).normalized;
                 transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.fixedDeltaTime);
@@ -73,6 +73,7 @@ public class CoinScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Coin collected!");
             GameManager.Instance.UpdateCoin();
             Destroy(gameObject);
         }
