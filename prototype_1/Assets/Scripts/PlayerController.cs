@@ -24,11 +24,19 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
     private BoxCollider playerCol;
 
+    [Header("Audio")]
+    public AudioSource audioSource; 
+    public AudioClip jumpSound; 
+    public AudioClip rollSound; 
+    public AudioClip deathSound; 
+
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         playerCol = GetComponent<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
         GameManager.OnGameStateChanged += HandleGameStateChanged;
     }
@@ -143,6 +151,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
             dirtParti.Stop();
+            audioSource.PlayOneShot(jumpSound);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isRolling)
@@ -162,6 +171,7 @@ public class PlayerController : MonoBehaviour
                 isRolling = false;
                 rollTimer = 0f;
                 playerAnim.SetBool("Roll_b", false);
+                audioSource.PlayOneShot(rollSound);
             }
         }
     }
@@ -171,12 +181,28 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            if (!isRolling) dirtParti.Play();
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            GameManager.Instance.UpdateGameState(GameState.GameOver);
+            if (!GameManager.Instance.IsShieldActive())
+            {
+                GameManager.Instance.UpdateGameState(GameState.GameOver);
+            }
+            else
+            {
+                StartCoroutine(StartInvulnerability(0.1f));
+            }
         }
     }
+
+    private IEnumerator StartInvulnerability(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        GameManager.Instance.DisableShield();
+        GameManager.Instance.UpdateActivePowerUpsUI();
+    }
+
 
     private IEnumerator ReduceColliderHeight(float duration)
     {

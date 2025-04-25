@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,14 +18,26 @@ public class GameManager : MonoBehaviour
     private bool gameOver = false;
     private bool gameStart = true;
     private bool gamePlaying = false;
+    private int doubleScore = 0;
+    private bool magent = false;
+    private bool shield = false;
 
     [Header("UI Elements")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI multipleText;
+    public TextMeshProUGUI activePowerUpsText;
     public GameObject gameOverPanel;
     public GameObject gamePlayingPanel;
     public GameObject gameStartPanel;
+
+    [Header("Difficulty Settings")]
+    public float initialRepeatRate = 1f; // Giá trị ban đầu của repeatRate
+    public float minRepeatRate = 0.5f; // Giá trị nhỏ nhất của repeatRate
+    public float rateDecreaseInterval = 20f; // Giảm repeatRate mỗi 20 giây
+    public float rateDecreaseAmount = 0.1f; // Giảm 0.1 giây mỗi lần
+    private float currentRepeatRate; // Giá trị repeatRate hiện tại
+    private float timeSinceStart = 0f;
 
     void Awake()
     {
@@ -47,6 +60,19 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UpdateGameState(GameState.Start);
+    }
+
+    void FixedUpdate()
+    {
+        if (gamePlaying)
+        {
+            timeSinceStart += Time.fixedDeltaTime;
+            if (timeSinceStart >= rateDecreaseInterval)
+            {
+                currentRepeatRate = Mathf.Max(minRepeatRate, currentRepeatRate - rateDecreaseAmount);
+                timeSinceStart = 0f;
+            }
+        }
     }
 
     public void UpdateGameState(GameState newState)
@@ -80,9 +106,12 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = true;
         gamePlaying = false;
+        currentRepeatRate = initialRepeatRate; // Reset repeatRate
+        timeSinceStart = 0f;
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
         UpdateMultipleUI(1);
+        UpdateActivePowerUpsUI();
 
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
@@ -95,6 +124,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(coin);
         }
+        GameObject[] PowerUps = GameObject.FindGameObjectsWithTag("PowerUp");
+        foreach (GameObject PowerUp in PowerUps)
+        {
+            Destroy(PowerUp);
+        }
     }
 
     private void HandleGamePlayingScreen()
@@ -104,9 +138,12 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = false;
         gamePlaying = true;
+        currentRepeatRate = initialRepeatRate; // Reset repeatRate
+        timeSinceStart = 0f;
         UpdateScoreUI(score);
         UpdateCoinUI(coin);
         UpdateMultipleUI(1);
+        UpdateActivePowerUpsUI();
         StartCoroutine(IncreaseScoreOverTime(scorePer));
     }
 
@@ -123,11 +160,16 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         gameStart = false;
         gamePlaying = true;
+        shield = false;
+        doubleScore = 0;
+        magent = false;
+        currentRepeatRate = initialRepeatRate; 
+        timeSinceStart = 0f;
 
         UpdateScoreUI(0);
         UpdateCoinUI(0);
         UpdateMultipleUI(1);
-
+        UpdateActivePowerUpsUI();
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
         {
@@ -138,6 +180,12 @@ public class GameManager : MonoBehaviour
         foreach (GameObject coin in coins)
         {
             Destroy(coin);
+        }
+
+        GameObject[] PowerUps = GameObject.FindGameObjectsWithTag("PowerUp");
+        foreach (GameObject PowerUp in PowerUps)
+        {
+            Destroy(PowerUp);
         }
 
         UpdateGameState(GameState.Playing);
@@ -152,13 +200,71 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float GetCurrentRepeatRate()
+    {
+        return currentRepeatRate;
+    }
     public void UpdateScore(int scoreToAdd, int multiple)
     {
         if (!gameOver)
         {
-            score += scoreToAdd * multiple;
+            int finalMultiple = multiple;
+
+            if (doubleScore > 0)
+            {
+                finalMultiple *= (int)Mathf.Pow(2, doubleScore);
+            }
+
+            score += scoreToAdd * finalMultiple;
             UpdateScoreUI(score);
         }
+    }
+
+    public void ActivateDoubleScore()
+    {
+        if (!gameOver)
+        {
+            doubleScore++;
+            UpdateMultiple();
+            StartCoroutine(DoubleScoreDuration());
+            UpdateActivePowerUpsUI();
+        }
+    }
+
+    private void UpdateMultiple()
+    {
+        int multiple = (int)Mathf.Pow(2, doubleScore);
+        UpdateMultipleUI(multiple);
+    }
+
+    private IEnumerator DoubleScoreDuration()
+    {
+        yield return new WaitForSeconds(5f);
+        doubleScore--;
+        UpdateMultiple();
+        UpdateActivePowerUpsUI();
+    }
+
+    public void ActivateMagnet()
+    {
+        if (!gameOver)
+        {
+            magent = true;
+            StartCoroutine(MagnetDuration());
+            UpdateActivePowerUpsUI();
+        }
+    }
+
+    private IEnumerator MagnetDuration()
+    {
+        yield return new WaitForSeconds(5f);
+        magent = false;
+        UpdateActivePowerUpsUI();
+    }
+
+    public bool IsMagnetActive()
+    {
+        return magent;
     }
 
     public void UpdateCoin()
@@ -185,6 +291,26 @@ public class GameManager : MonoBehaviour
         return gamePlaying;
     }
 
+    public bool IsShieldActive()
+    {
+        return shield;
+    }
+
+    public void EnableShield()
+    {
+        shield = true;
+    }
+
+    public void DisableShield()
+    {
+        shield = false;
+    }
+
+    public float GetRepeatRate()
+    {
+        return currentRepeatRate;
+    }
+
     private void UpdateScoreUI(int score)
     {
         scoreText.text = score.ToString("000000");
@@ -198,6 +324,26 @@ public class GameManager : MonoBehaviour
     private void UpdateMultipleUI(int multiple)
     {
         multipleText.text = "x" + multiple;
+    }
+
+    public void UpdateActivePowerUpsUI()
+    {
+        string activePowerUps = "";
+        if (doubleScore > 0)
+        {
+            activePowerUps += "X2\n";
+        }
+
+        if (magent)
+        {
+            activePowerUps += "Magnet\n";
+        }
+
+        if (shield)
+        {
+            activePowerUps += "Shield\n";
+        }
+        activePowerUpsText.text = activePowerUps;
     }
 
     public void StartButtonPressed()
@@ -217,8 +363,8 @@ public class GameManager : MonoBehaviour
 
     public void ExitButtonPressed()
     {
-        //Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
 

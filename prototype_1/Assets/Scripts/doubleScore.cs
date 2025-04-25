@@ -38,7 +38,7 @@ public class DoubleScore : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //GameManager.Instance.ActivateDoubleScore();
+            GameManager.Instance.ActivateDoubleScore();
             Destroy(gameObject);
         }
     }

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6157638785666997186}
   - component: {fileID: 7208695150082176322}
   - component: {fileID: 5019211582269331050}
+  - component: {fileID: 987194384186442233}
   m_Layer: 0
   m_Name: Magent
-  m_TagString: Magent
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +62,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &5019211582269331050
 BoxCollider:
@@ -84,6 +85,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &987194384186442233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339823108651837929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7df304983bfd5458a68baea3188848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 180
+  zBound: -35
+  speed: 20
+  magnetDuration: 5
 --- !u!1 &1533649386701622355
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
@@ -10,15 +10,33 @@ public class CoinScript : MonoBehaviour
     [Header("Particle settings")]
     public float particleDuration = 0.2f;
 
+    private Transform playerTransform; 
+    public float moveSpeed = 30f;      
     void Start()
     {
-
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void FixedUpdate()
     {
         if (GameManager.Instance.IsGameOver()) return;
+        coinMove();
         Move();
+    }
+
+    void coinMove()
+    {
+        if (GameManager.Instance.IsMagnetActive())
+        {
+            float magnetRange = 10f; 
+            float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
+
+            if (distanceToPlayer <= magnetRange) 
+            {
+                Vector3 direction = (playerTransform.position - transform.position).normalized;
+                transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.fixedDeltaTime);
+            }
+        }
     }
 
     private void Update()
@@ -55,6 +73,7 @@ public class CoinScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Coin collected!");
             GameManager.Instance.UpdateCoin();
             Destroy(gameObject);
         }

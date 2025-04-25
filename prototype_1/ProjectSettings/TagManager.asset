@@ -8,6 +8,10 @@ TagManager:
   - Obstacle
   - Safe
   - Coin
+  - DoubleScrore
+  - Magent
+  - PowerUp
+  - Obstacle_Parrent
   layers:
   - Default
   - TransparentFX
