@@ -1,0 +1,209 @@
+report@config:load 39.77
+Authorized using stored user info.
+report@account:authorize 18.43
+stderr: 'rm' is not recognized as an internal or external command,
+operable program or batch file.
+
+Exporting assets from Unity.............
+
+[ Stage1 ] Assets exported from Unity and staged for further processing
+report@unity:export 10118.97
+report@config:load 28.25
+Using D:/Work/ZTech_Prototype_1_Unity/prototype_1/Assets/Resources/04B_19__.TTF file to generate an atlas for 04B_19__[71860] font
+  Using alphabet  §1234567890-=qwertyuiop[]asdfghjkl;'\`zxcvbnm,./±!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|~ZXCVBNM<>?
+Using D:/Work/ZTech_Prototype_1_Unity/prototype_1/Assets/TextMesh Pro/Fonts/LiberationSans.ttf file to generate an atlas for LiberationSans[49082] font
+  Using alphabet  §1234567890-=qwertyuiop[]asdfghjkl;'\`zxcvbnm,./±!@#$%^&*()_+QWERTYUIOP{}ASDFGHJKL:"|~ZXCVBNM<>?
+Combined 97 glyphs into bitmap texture at D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage1/tmp/fonts/04B_19__-71860/output_0.png (13kb)
+Combined 97 glyphs into bitmap texture at D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage1/tmp/fonts/LiberationSans-49082/output_0.png (56kb)
+Found custom rules for texture Assets/Resources/04B_19__ SDF.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/Resources/04B_19__ SDF.asset","isOverride":true}
+Found custom rules for texture Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset","isOverride":true}
+Found custom rules for texture Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset","isOverride":true}
+Found custom rules for texture Assets/Resources/04B_19__ SDF Outline.asset
+  {"maxWidth":512,"maxHeight":512,"format":"png32","compression":"none","quality":65,"script":"","ext":"","name":"Assets/Resources/04B_19__ SDF Outline.asset","isOverride":true}
+Resources:
+{}
+report@assets:stage2 7317.97
+report@assets:stage3 550.79
+[ Stage2 ] Assets postprocessed and bundled successfully
+report@config:unity 0.31
+report@config:load 66.31
+report@config:unity 0.21
+report@code:compose 146.78
+Authorized using stored user info.
+report@account:authorize 4.36
+MSBuild version 17.14.40+3e7442088 for .NET Framework
+
+Build started 3/20/2026 4:01:34 PM.
+
+
+
+Project "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj" on node 1 (Rebuild target(s)).
+CoreClean:
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityScriptsCompiler.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityScriptsCompiler.pdb".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.Html5.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.WebGL.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\DOTween.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\JetBrains.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Newtonsoft.Json.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.Core.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.dom.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.es5.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.scripthost.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\TextMeshPro.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityEngine.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityEngine.UI.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityEngine.UniversalRenderPipeline.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.Html5.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.WebGL.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Newtonsoft.Json.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.Core.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.dom.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.es5.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.scripthost.xml".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\Scripts.csproj.AssemblyReference.cache".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\Scripts.csproj.CoreCompileInputs.cache".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\Scripts.csproj.Up2Date".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\UnityScriptsCompiler.dll".
+
+  Deleting file "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\UnityScriptsCompiler.pdb".
+
+GenerateTargetFrameworkMonikerAttribute:
+Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+
+CoreCompile:
+  D:\Software\VisualCode\MSBuild\Current\Bin\Roslyn\csc.exe /noconfig /nowarn:CS0626,1701,1702 /fullpaths /nostdlib+ /errorreport:prompt /warn:4 /define:UNITY_LUNA;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_2022;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;UNITY_2022_3;UNITY_2022_3_62 /highentropyva+ /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Core.17.9.42-luna\lib\net40\Bridge.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Html5.17.9.0\lib\net40\Bridge.Html5.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.WebGL.1.22.0\lib\net40\Bridge.WebGL.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\DOTween.1.2.705\lib\net40\DOTween.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.ide.rider\3.0.0\JetBrains.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Newtonsoft.Json.1.16.0\lib\net40\Newtonsoft.Json.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.Core.1.6.6733\lib\net40\Retyped.Core.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.dom.2.8.6733\lib\net40\Retyped.dom.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.es5.2.8.6733\lib\net40\Retyped.es5.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.scripthost.2.8.6733\lib\net40\Retyped.scripthost.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.textmeshpro\3.0.6\TextMeshPro.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Vendor\UnityEngine.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.ui\1.2.1\UnityEngine.UI.dll" /reference:"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.urp\7.6\UnityEngine.UniversalRenderPipeline.dll" /debug+ /debug:full /optimize- /out:obj\Debug\UnityScriptsCompiler.dll /subsystemversion:6.00 /target:library /warnaserror- /utf8output /langversion:8 D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\CoinScript.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\CollisionSound.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\doubleScore.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\FenceScript.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\GameManager.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\Magent.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\PlayerController.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\RoadScript.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\ShieldScript.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\SpawnManager.cs D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\TutorialInfo\Scripts\Readme.cs Properties/AssemblyInfo.cs Sources/OtherDummyScript.cs "obj\Debug\.NETFramework,Version=v4.7.AssemblyAttributes.cs"
+
+D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\PlayerController.cs(27,21): warning CS0169: The field 'PlayerController.swipeStartPosition' is never used [D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj]
+
+D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\PlayerController.cs(28,19): warning CS0169: The field 'PlayerController.swipeStartTime' is never used [D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj]
+
+  CompilerServer: server - server processed compilation - Scripts
+
+_CopyFilesMarkedCopyLocal:
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Newtonsoft.Json.1.16.0\lib\net40\Newtonsoft.Json.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Newtonsoft.Json.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Core.17.9.42-luna\lib\net40\Bridge.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.dll".
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\DOTween.1.2.705\lib\net40\DOTween.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\DOTween.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.ide.rider\3.0.0\JetBrains.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\JetBrains.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Html5.17.9.0\lib\net40\Bridge.Html5.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.Html5.dll".
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.WebGL.1.22.0\lib\net40\Bridge.WebGL.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.WebGL.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.scripthost.2.8.6733\lib\net40\Retyped.scripthost.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.scripthost.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.Core.1.6.6733\lib\net40\Retyped.Core.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.Core.dll".
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.dom.2.8.6733\lib\net40\Retyped.dom.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.dom.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.es5.2.8.6733\lib\net40\Retyped.es5.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.es5.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.textmeshpro\3.0.6\TextMeshPro.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\TextMeshPro.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Vendor\UnityEngine.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityEngine.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.ui\1.2.1\UnityEngine.UI.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityEngine.UI.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\com.unity.urp\7.6\UnityEngine.UniversalRenderPipeline.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityEngine.UniversalRenderPipeline.dll".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Core.17.9.42-luna\lib\net40\Bridge.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Html5.17.9.0\lib\net40\Bridge.Html5.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.Html5.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.WebGL.1.22.0\lib\net40\Bridge.WebGL.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Bridge.WebGL.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Bridge.Newtonsoft.Json.1.16.0\lib\net40\Newtonsoft.Json.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Newtonsoft.Json.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.Core.1.6.6733\lib\net40\Retyped.Core.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.Core.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.dom.2.8.6733\lib\net40\Retyped.dom.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.dom.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.es5.2.8.6733\lib\net40\Retyped.es5.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.es5.xml".
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\packages\Retyped.scripthost.2.8.6733\lib\net40\Retyped.scripthost.xml" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\Retyped.scripthost.xml".
+
+  Creating "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\Scripts.csproj.Up2Date" because "AlwaysCreate" was specified.
+
+  Touching "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\Scripts.csproj.Up2Date".
+
+CopyFilesToOutputDirectory:
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\UnityScriptsCompiler.dll" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityScriptsCompiler.dll".
+
+  Scripts -> D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityScriptsCompiler.dll
+
+  Copying file from "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\obj\Debug\UnityScriptsCompiler.pdb" to "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\bin\Debug\UnityScriptsCompiler.pdb".
+
+BridgeNetCompilerTask:
+  Bridge started
+
+      To enable detailed logging, configure "logging" in bridge.json.
+      https://github.com/bridgedotnet/Bridge/wiki/global-configuration#logging
+
+  Bridge done
+
+Done Building Project "D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj" (Rebuild target(s)).
+
+
+Build succeeded.
+
+
+
+"D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj" (Rebuild target) (1) ->
+(CoreCompile target) -> 
+  D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\PlayerController.cs(27,21): warning CS0169: The field 'PlayerController.swipeStartPosition' is never used [D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj]
+  D:\Work\ZTech_Prototype_1_Unity\prototype_1\LunaTemp\stage3\processed-scripts\Assets\Scripts\PlayerController.cs(28,19): warning CS0169: The field 'PlayerController.swipeStartTime' is never used [D:\Software\Unity\Unity Playworks\7.1.0\pipeline\templates\LunaCompiler\Scripts\Scripts.csproj]
+
+    2 Warning(s)
+    0 Error(s)
+
+
+Time Elapsed 00:00:13.60
+
+Source code compiled successfully!
+﻿
+[ error ] $﻿
+PHC: LP error code not found in JSON: 3015, JSON file might be outdated. Error message: Sequence contains no matching element
+
+Diagnostics gathered successfully
+report@code:build 21571.26
+report@diagnostics:verify 0.75
+report@diagnostics:upload 2149.35
+report@code:stage 13546.26
+[ Stage3 ] Code compiled and bundled successfully.
+report@code:bundle 37487.70
+report@package:stage 2308.91
+[ Stage4 ] Target platform: develop
+[ Stage4 ] Package bundled successfully
+report@assets:stats 0.21

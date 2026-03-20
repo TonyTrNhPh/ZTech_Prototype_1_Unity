@@ -1,0 +1,31 @@
+{
+  "ignores": [],
+  "groups": [
+    [
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/CoinScript.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/GameManager.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/doubleScore.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/FenceScript.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/Magent.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/PlayerController.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/RoadScript.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/ShieldScript.cs",
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/SpawnManager.cs"
+    ],
+    [
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/Scripts/CollisionSound.cs"
+    ],
+    [
+      "D:/Work/ZTech_Prototype_1_Unity/prototype_1/LunaTemp/stage3/processed-scripts/Assets/TutorialInfo/Scripts/Readme.cs"
+    ],
+    [
+      "D:/Software/Unity/Unity Playworks/7.1.0/pipeline/templates/LunaCompiler/Scripts/Properties/AssemblyInfo.cs"
+    ],
+    [
+      "D:/Software/Unity/Unity Playworks/7.1.0/pipeline/templates/LunaCompiler/Scripts/Sources/OtherDummyScript.cs"
+    ],
+    [
+      "D:/Software/Unity/Unity Playworks/7.1.0/pipeline/templates/LunaCompiler/Scripts/obj/Debug/.NETFramework,Version=v4.7.AssemblyAttributes.cs"
+    ]
+  ]
+}

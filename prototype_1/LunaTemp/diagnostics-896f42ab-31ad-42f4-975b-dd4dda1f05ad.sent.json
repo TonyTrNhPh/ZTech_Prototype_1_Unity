@@ -1,0 +1,301 @@
+{
+    "BuildID": "896f42ab-31ad-42f4-975b-dd4dda1f05ad",
+    "Command": "project:build",
+    "ProjectID": "c91b2ab9862ac504cbca2448278da8f0",
+    "ProjectStateHash": "c692f1df92633325e93350e1e4247cfa2baa5369b4df2544747c79082855d10c",
+    "StageCompletedAt": 3,
+    "EarliestFatalError": 0,
+    "StartTime": 1773997270943,
+    "EndTime": 1773997311441,
+    "PlaygroundUserID": 29721,
+    "OperatingSystem": "win32",
+    "UnityPackageID": null,
+    "TargetPlatform": "develop",
+    "UnityVersion": "2022.3.62f3",
+    "LunaVersion": "7.1.0",
+    "LogCount": 12,
+    "Logs": [
+        {
+            "LogID": "3935808c-193e-462e-8d78-b0c328dc8915",
+            "Order": 8,
+            "Timestamp": 1773997311638,
+            "Stage": 3,
+            "ErrorType": 0,
+            "ErrorCode": "LP3009",
+            "Description": "You are using an unsupported feature: GameObject.FindGameObjectWithTag",
+            "Details": [
+                "You are using a function/component which are currently not supported in Luna: GameObject.FindGameObjectWithTag. "
+            ],
+            "DescriptionValues": [
+                "GameObject.",
+                "FindGameObjectWithTag"
+            ],
+            "DetailsValues": [
+                "GameObject.",
+                "FindGameObjectWithTag"
+            ],
+            "LogCount": 1,
+            "LinePosition": 17,
+            "FilePath": "D:\\Work\\ZTech_Prototype_1_Unity\\prototype_1\\Assets\\Scripts\\CoinScript.cs",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "76fc6b29-858f-47a1-ac65-8a654091e223",
+            "Order": 8,
+            "Timestamp": 1773997311726,
+            "Stage": 3,
+            "ErrorType": 1,
+            "ErrorCode": "LP3006",
+            "Description": "You are not using the Luna API: Playable.InstallFullGame",
+            "Details": [
+                "You are not using the Luna API: Playable.InstallFullGame. Some ad networks require these calls. Please add these calls to ensure your playable works on all ad networks. Check documentation for more information."
+            ],
+            "DescriptionValues": [
+                "Playable",
+                "InstallFullGame"
+            ],
+            "DetailsValues": [
+                "Playable",
+                "InstallFullGame"
+            ],
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "cfb944f8-ccd0-46db-9069-725cac543f47",
+            "Order": 8,
+            "Timestamp": 1773997311726,
+            "Stage": 3,
+            "ErrorType": 1,
+            "ErrorCode": "LP3015",
+            "Description": "You are not the Game Ended API: LifeCycle.GameEnded",
+            "Details": [
+                "You are not using the Game Ended API: LifeCycle.GameEnded. Some ad networks require this call, please add the event to avoid the ad being rejected."
+            ],
+            "DescriptionValues": [
+                "LifeCycle",
+                "GameEnded"
+            ],
+            "DetailsValues": [
+                "LifeCycle",
+                "GameEnded"
+            ],
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "ef9af4c5-c4c5-4d89-a199-d55f3cd29f49",
+            "Order": 8,
+            "Timestamp": 1773997311727,
+            "Stage": 3,
+            "ErrorType": 3,
+            "ErrorCode": "LP3007",
+            "Description": "You are not using any custom events",
+            "Details": [
+                "You are not using any custom events. It is recommended to use custom events to have a better understanding of the playable."
+            ],
+            "DescriptionValues": [
+                ""
+            ],
+            "DetailsValues": [
+                ""
+            ],
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "1adad7dc-c8cb-4b4a-899b-326310e5f3f5",
+            "Order": 8,
+            "Timestamp": 1773997311727,
+            "Stage": 3,
+            "ErrorType": 3,
+            "ErrorCode": "LP3011",
+            "Description": "You are not using any LunaPlaygroundFields attributes.",
+            "Details": [
+                "You are not using any LunaPlaygroundFields attributes, it allows you to configure your playable to different concepts to find the best variation, which can drastically improve playable performance on all ad networks."
+            ],
+            "DescriptionValues": null,
+            "DetailsValues": null,
+            "LogCount": 1,
+            "LinePosition": null,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "929ef314-4051-4ddd-9c20-8a322c67115c",
+            "Order": 0,
+            "Timestamp": 1773997274444,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1001",
+            "Description": "Update shader stripping settings",
+            "Details": [
+                "Some of the scenes appear to have fog enabled and / or lightmapping data. Please modify 'Shader stripping' settings to always include required shader variants."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "e6aefe62-c8f3-4166-9422-79ed567d7250",
+            "Order": 1,
+            "Timestamp": 1773997278618,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1030",
+            "Description": "TMP Font Asset uses unsupported 'Atlas Population Mode'",
+            "Details": [
+                "TMP Font Asset '{0}' uses Atlas Population Mode '{1}' which is not supported"
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                "LiberationSans SDF - Fallback",
+                "Dynamic"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "462cb28e-a113-47bf-91a3-7e9c867f9d66",
+            "Order": 2,
+            "Timestamp": 1773997278772,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1040",
+            "Description": "URP ScreenSpaceAmbientOcclusion (SSAO) is active in URP UniversalRenderData.",
+            "Details": [
+                "The Unity Playworks Plugin doesn't directly support Unity's built-in SSAO. If you enable this effect in Unity, it will not appear in your final build. To use SSAO, you can enable it directly in Dev Environment or Creative Editor on Unity Playworks."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                "ScreenSpaceAmbientOcclusion"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "32f1f642-0e07-4a05-acf7-daf6a9287327",
+            "Order": 3,
+            "Timestamp": 1773997281633,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1015",
+            "Description": "This TMP version is not fully supported",
+            "Details": [
+                "The incorrect Text Mesh Pro for this Unity version is in use, please update or downgrade to the recommended version {0} in the package manager. Go to Window → Package Manager"
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                "3.0.6, 3.0.7"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "ebb66786-d3cb-480b-87b6-63bf679c712c",
+            "Order": 4,
+            "Timestamp": 1773997281633,
+            "Stage": 1,
+            "ErrorType": 0,
+            "ErrorCode": "LP1032",
+            "Description": "Package(s) is not supported in Luna",
+            "Details": [
+                "Currently package(s) com.unity.timeline are not supported in Luna. We recommend you to remove it and workaround it's functionality."
+            ],
+            "DescriptionValues": [
+                "com.unity.timeline (1.8.7)"
+            ],
+            "DetailsValues": [
+                "com.unity.timeline"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "D:/Work/ZTech_Prototype_1_Unity/prototype_1/Packages\\manifest.json",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "413f5fd8-fee1-4d11-b84a-f0ed1110b195",
+            "Order": 5,
+            "Timestamp": 1773997281633,
+            "Stage": 1,
+            "ErrorType": 3,
+            "ErrorCode": "LP1002",
+            "Description": "Repeat wrap mode used on a texture with non power-of-two dimensions, this might not be rendered correctly.",
+            "Details": [
+                "Repeat wrap mode used on 'Font Texture' texture at 'Assets/Resources/04B_19__.TTF' with non power-of-two dimensions, this might not be rendered correctly."
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [
+                "Font Texture",
+                "Assets/Resources/04B_19__.TTF"
+            ],
+            "LogCount": 1,
+            "LinePosition": 0,
+            "FilePath": "Assets/Resources/04B_19__.TTF",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        },
+        {
+            "LogID": "02e343d7-bb2f-4840-b2dd-43a15705f945",
+            "Order": 6,
+            "Timestamp": 1773997281633,
+            "Stage": 1,
+            "ErrorType": 2,
+            "ErrorCode": "LP1010",
+            "Description": "Looks like a collider was scaled, this might affect performance.",
+            "Details": [
+                "Safe_spot",
+                "Prop_Barrier03",
+                "Coin",
+                "ShieldItem",
+                "Cube",
+                "Cube (1)",
+                "Cube (2)"
+            ],
+            "DescriptionValues": [],
+            "DetailsValues": [],
+            "LogCount": 7,
+            "LinePosition": 0,
+            "FilePath": "",
+            "ClassName": "",
+            "MemberName": "",
+            "Severity": 0
+        }
+    ]
+}
